@@ -1,0 +1,15 @@
+{
+  "name": "ZBadge 1st Anniversary",
+  "description": "This is your ZBadge",
+  "image": "https://gateway.pinata.cloud/ipfs/QmbuQC3aTzoHgaRZY2fh7AbkNeH7MUUZkwiTppQLcjAwwr/2.png",
+  "attributes": [
+    {
+      "trait_type": "Year",
+      "value": "1"
+    },
+    {
+      "trait_type": "Points",
+      "value": "2000"
+    }
+  ]
+}
