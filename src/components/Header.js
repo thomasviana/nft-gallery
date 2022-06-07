@@ -1,39 +1,43 @@
-import React, { Component } from "react";
-import "../App.css";
+import React, { useContext, useEffect, useState } from "react";
+import { ConnectContext } from "../context/conntectProvider";
 
-class Header extends Component {
-  render() {
-    let isConnected;
-    if (this.props.account.length > 0) {
-      isConnected = true;
+const Header = () => {
+  const { state, handler } = useContext(ConnectContext);
+
+  const [isConnected, setIsConnected] = useState(false);
+
+  useEffect(() => {
+    if (state.account && state.account.length > 0) {
+      setIsConnected(true);
     } else {
-      isConnected = false;
+      setIsConnected(false);
     }
-    return (
-      <div className="Header">
-        <div className="Header-Title">
-          <h1>NFT GALLERY</h1>
-        </div>
-        {isConnected ? (
-          <ul>
-            <li>Your Address: {this.props.account}</li>
-            <li>Contract: {this.props.contractAddress}</li>
-            <li>Owner: {this.props.contractOwner}</li>
-          </ul>
-        ) : (
-          <button
-            className="log"
-            onClick={(event) => {
-              event.preventDefault();
-              this.props.connectWallet();
-            }}
-          >
-            Connect Wallet
-          </button>
-        )}
-      </div>
-    );
-  }
-}
+  }, [state.account]);
 
-export default Header;
+  return (
+    <div className="Header">
+      <div className="Header-Title">
+        <h1>NFT GALLERY</h1>
+      </div>
+      {isConnected ? (
+        <ul>
+          <li>Your Address: {state.account}</li>
+          <li>Contract: {state.contractAddress}</li>
+          <li>Owner: {state.ownerAddress}</li>
+        </ul>
+      ) : (
+        <button
+          className="log"
+          onClick={(event) => {
+            event.preventDefault();
+            handler.connectWallet();
+          }}
+        >
+          Connect Wallet
+        </button>
+      )}
+    </div>
+  );
+};
+
+export { Header };
